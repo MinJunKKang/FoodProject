@@ -1,4 +1,4 @@
-package com.example.myfoodproject
+package com.example.japanese_restaurant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

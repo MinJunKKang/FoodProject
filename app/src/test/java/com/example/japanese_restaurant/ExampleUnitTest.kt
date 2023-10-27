@@ -1,4 +1,4 @@
-package com.example.myfoodproject
+package com.example.japanese_restaurant
 
 import org.junit.Test
 
