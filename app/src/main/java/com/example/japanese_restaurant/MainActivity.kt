@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val image_ramen = findViewById<ImageView>(R.id.ramen)
         image_ramen.setOnClickListener {
-            Toast.makeText(this, "1번 클릭 완료", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "1번 클릭 완료", Toast.LENGTH_LONG)
         }
 
     }
