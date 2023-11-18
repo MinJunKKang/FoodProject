@@ -1,4 +1,4 @@
-package com.example.japanese_restaurant
+package com.example.myfoodproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

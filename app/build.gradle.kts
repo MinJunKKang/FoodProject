@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.myfoodproject"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myfoodproject"
@@ -32,6 +32,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    viewBinding{
+        enable = true
     }
 }
 
