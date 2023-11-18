@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/entryFragment">
+
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="com.example.myfoodproject.EntryFragment"
+        android:label="fragment_entry"
+        tools:layout="@layout/fragment_entry" >
+        <action
+            android:id="@+id/action_entryFragment_to_writeFragment"
+            app:destination="@id/writeFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeFragment"
+        android:name="com.example.myfoodproject.WriteFragment"
+        android:label="글 쓰기"
+        tools:layout="@layout/fragment_write" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.myfoodproject.InfoFragment"
+        android:label="내 정보"
+        tools:layout="@layout/fragment_info">
+        <action
+            android:id="@+id/action_infoFragment_to_newpasswordFragment2"
+            app:destination="@id/newpwFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_newnickFragment"
+            app:destination="@id/newnickFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newpwFragment"
+        android:name="com.example.myfoodproject.NewpasswordFragment"
+        android:label="비밀번호 변경"
+        tools:layout="@layout/fragment_newpassword" />
+    <fragment
+        android:id="@+id/newnickFragment"
+        android:name="com.example.myfoodproject.NewnickFragment"
+        android:label="닉네임 변경"
+        tools:layout="@layout/fragment_newnick" />
+</navigation>
