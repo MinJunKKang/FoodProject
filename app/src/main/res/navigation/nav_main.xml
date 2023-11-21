@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_infoFragment_to_newnickFragment"
             app:destination="@id/newnickFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/newpwFragment"
@@ -47,8 +50,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.myfoodproject.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="로그인"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -59,8 +62,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.myfoodproject.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        android:label="회원가입"
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
