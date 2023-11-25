@@ -1,10 +1,12 @@
 package com.example.myfoodproject
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -38,6 +40,10 @@ class InfoFragment : Fragment() {
             viewModel.logout()
             findNavController().navigate(R.id.action_infoFragment_to_loginFragment)
         }
+        binding?.btnDelaccount?.setOnClickListener {
+            // "계정 탈퇴" 버튼 클릭 시 다이얼로그 띄우기
+            showWithdrawDialog()
+        }
 
         // FirebaseUser를 가져와서 UI에 표시하는 Observer
         viewModel.getCurrentUser().observe(viewLifecycleOwner, Observer { currentUser ->
@@ -55,5 +61,33 @@ class InfoFragment : Fragment() {
                 binding?.txtNickname?.text = user.nick
             }
         })
+    }
+
+    private fun showWithdrawDialog() {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setTitle("계정 탈퇴")
+            .setMessage("정말로 탈퇴하시겠습니까?")
+            .setPositiveButton("네") { _, _ ->
+                // "네" 버튼을 클릭했을 때의 동작
+                viewModel.deleteUser { success, message ->
+                    if (success) {
+                        findNavController().navigate(R.id.action_infoFragment_to_loginFragment)
+                    } else {
+                        // 탈퇴 실패 시 토스트 메시지 표시
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("아니오") { dialog, _ ->
+                // "아니오" 버튼을 클릭했을 때의 동작
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

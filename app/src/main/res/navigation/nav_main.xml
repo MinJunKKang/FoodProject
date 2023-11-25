@@ -46,7 +46,11 @@
         android:id="@+id/newnickFragment"
         android:name="com.example.myfoodproject.NewnickFragment"
         android:label="닉네임 변경"
-        tools:layout="@layout/fragment_newnick" />
+        tools:layout="@layout/fragment_newnick" >
+        <action
+            android:id="@+id/action_newnickFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.myfoodproject.LoginFragment"

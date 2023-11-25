@@ -15,14 +15,16 @@ class UserViewModel: ViewModel() {
 
 
     // 회원가입 함수
-    fun signUp(nick: String, name: String, email: String, password: String, callback: (Boolean) -> Unit) {
-        userrepository.signUp(nick, name, email, password, callback)
+    fun signUp(nick: String, name: String, email: String, password: String, callback: (Boolean, String?) -> Unit) {
+        userrepository.signUp(nick, name, email, password) { success, message ->
+            callback.invoke(success, message)
+        }
     }
 
     // 로그인 함수
-    fun login(email: String, password: String, callback: (Boolean) -> Unit) {
-        userrepository.login(email, password) { success ->
-            callback.invoke(success)
+    fun login(email: String, password: String, callback: (Boolean, String?) -> Unit) {
+        userrepository.login(email, password) { success, message ->
+            callback.invoke(success, message)
         }
     }
 
@@ -39,9 +41,26 @@ class UserViewModel: ViewModel() {
         }
     }
 
+    // 닉네임 바꾸는 함수
+    fun updateNickname(newNickname: String, callback: (Boolean, String?) -> Unit) {
+        userrepository.updateNickname(newNickname) { success, message ->
+            callback.invoke(success, message)
+        }
+    }
 
+    // 로그아웃 함수
     fun logout() {
         userrepository.logout()
     }
+
+    fun deleteUser(callback: (Boolean, String?) -> Unit) {
+        userrepository.deleteUser { success, message ->
+            if (success) {
+                _userInfo.postValue(null)
+            }
+            callback.invoke(success, message)
+        }
+    }
+
 
 }

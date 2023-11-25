@@ -33,12 +33,11 @@ class LoginFragment : Fragment() {
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPassword?.text.toString()
 
-            viewModel.login(email, password) { success ->
+            viewModel.login(email, password) { success, message->
                 if (success) {
                     findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
-                    Toast.makeText(requireContext(), "로그인 성공", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "로그인 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -46,5 +45,10 @@ class LoginFragment : Fragment() {
         binding?.btnRegister?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

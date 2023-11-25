@@ -36,14 +36,19 @@ class RegisterFragment : Fragment() {
             val password = binding?.etMpassword?.text.toString().trim()
 
             // 회원가입
-            viewModel.signUp(nick, name, email, password) { success ->
+            viewModel.signUp(nick, name, email, password) { success, message ->
                 if (success) {
-                    Toast.makeText(requireContext(), "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 } else {
-                    Toast.makeText(requireContext(), "회원가입 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
