@@ -1,10 +1,10 @@
-package com.example.myfoodproject
+package com.example.foodproject
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfoodproject.databinding.ListRestaurantsBinding
+import com.example.foodproject.databinding.ListRestaurantsBinding
 class RestaurantsAdapter(val restaurants: Array<Restaurant>)
     : RecyclerView.Adapter<RestaurantsAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder    {

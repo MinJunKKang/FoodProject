@@ -1,4 +1,4 @@
-package com.example.myfoodproject
+package com.example.foodproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

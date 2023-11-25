@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/categoryFragment">
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.foodproject.CategoryFragment"
+        android:label="메인화면"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_ramenFragment"
+            app:destination="@id/ramenFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_sushiFragment"
+            app:destination="@id/sushiFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_tonkatsuFragement"
+            app:destination="@id/tonkatsuFragement" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalReviewFragment"
+        android:name="com.example.foodproject.PersonalReviewFragment"
+        android:label="개인리뷰"
+        tools:layout="@layout/fragment_personalreview" />
+    <fragment
+        android:id="@+id/ramenFragment"
+        android:name="com.example.foodproject.RamenFragment"
+        android:label="라멘"
+        tools:layout="@layout/fragment_ramen" />
+    <fragment
+        android:id="@+id/sushiFragment"
+        android:name="com.example.foodproject.SushiFragment"
+        android:label="스시"
+        tools:layout="@layout/fragment_sushi" />
+    <fragment
+        android:id="@+id/tonkatsuFragement"
+        android:name="com.example.foodproject.TonkatsuFragement"
+        android:label="돈카츠"
+        tools:layout="@layout/fragment_tonkatsu" />
+</navigation>

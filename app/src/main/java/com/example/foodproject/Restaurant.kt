@@ -1,4 +1,4 @@
-package com.example.myfoodproject
+package com.example.foodproject
 
 enum class FoodType{
     RAMEN,
