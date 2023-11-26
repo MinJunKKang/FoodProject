@@ -1,9 +1,9 @@
-package com.example.foodproject
+package com.example.myfoodproject
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodproject.databinding.ListReviewsBinding
+import com.example.myfoodproject.databinding.ListReviewsBinding
 class ReviewsAdapter(val reviews: Array<Review>): RecyclerView.Adapter<ReviewsAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewsAdapter.Holder {
         val binding = ListReviewsBinding.inflate(LayoutInflater.from(parent.context))
@@ -20,7 +20,6 @@ class ReviewsAdapter(val reviews: Array<Review>): RecyclerView.Adapter<ReviewsAd
         fun bind(review: Review){
 
             binding.txtComment.text = review.comment
-
             binding.txtGrade.text = review.grade.toString()
             binding.txtDate.text = review.date.toString()
         }

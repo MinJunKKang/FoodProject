@@ -1,10 +1,10 @@
-package com.example.foodproject
+package com.example.myfoodproject
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodproject.databinding.ListRestaurantsBinding
+import com.example.myfoodproject.databinding.ListRestaurantsBinding
 class RestaurantsAdapter(val restaurants: Array<Restaurant>)
     : RecyclerView.Adapter<RestaurantsAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder    {
@@ -19,11 +19,6 @@ class RestaurantsAdapter(val restaurants: Array<Restaurant>)
 
     class Holder(private val binding: ListRestaurantsBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(restaurant: Restaurant){
-            binding.imageView.setImageResource(when(restaurant.foodtype){
-                FoodType.RAMEN -> R.drawable.ramen
-                FoodType.SUSHI -> R.drawable.sushi
-                FoodType.TONKATSU -> R.drawable.tonkatsu
-            })
             binding.txtName.text = restaurant.name
             binding.txtRate.text = restaurant.rate.toString()
             binding.txtReview.text = restaurant.review.toString()

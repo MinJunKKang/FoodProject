@@ -1,4 +1,4 @@
-package com.example.foodproject
+package com.example.myfoodproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodproject.databinding.FragmentSushiBinding
+import com.example.myfoodproject.databinding.FragmentSushiBinding
 
 class SushiFragment : Fragment() {
 
     val restaurants = arrayOf(
-        Restaurant(FoodType.SUSHI,"스시 월드", 4.2, 566),
-        Restaurant(FoodType.SUSHI,"장인 스시", 4.7, 1024),
+        Restaurant("스시","스시 월드", 4.2, 566),
+        Restaurant("스시","장인 스시", 4.7, 1024),
     )
 
     var binding: FragmentSushiBinding? = null

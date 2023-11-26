@@ -1,4 +1,4 @@
-package com.example.foodproject
+package com.example.myfoodproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodproject.databinding.FragmentPersonalreviewBinding
+import com.example.myfoodproject.databinding.FragmentPersonalreviewBinding
 
 class PersonalReviewFragment : Fragment() {
     val reviews = arrayOf(

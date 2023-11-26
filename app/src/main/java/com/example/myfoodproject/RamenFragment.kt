@@ -1,20 +1,18 @@
-package com.example.foodproject
+package com.example.myfoodproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodproject.databinding.FragmentRamenBinding
+import com.example.myfoodproject.databinding.FragmentRamenBinding
 
 class RamenFragment : Fragment() {
 
     val restaurants = arrayOf(
-        Restaurant(FoodType.RAMEN,"라멘의 신", 4.9, 1254),
-        Restaurant(FoodType.RAMEN,"최고 라멘", 4.5, 841),
+        Restaurant("라멘", "라멘의 신", 4.9, 1254),
+        Restaurant("라멘", "최고 라멘", 4.5, 841),
     )
 
 
