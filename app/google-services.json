@@ -1,8 +1,8 @@
 {
   "project_info": {
     "project_number": "466210460953",
-    "project_id": "my-foodproject",
-    "storage_bucket": "my-foodproject.appspot.com"
+    "project_id": "myfoodproject",
+    "storage_bucket": "myfoodproject.appspot.com"
   },
   "client": [
     {
