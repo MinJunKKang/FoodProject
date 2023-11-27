@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/txt_name"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/txt_nickname"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="닉네임"

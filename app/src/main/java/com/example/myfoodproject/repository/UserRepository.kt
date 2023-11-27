@@ -45,7 +45,7 @@ class UserRepository {
 
     // db에 회원 정보 추가
     private fun addUserToDatabase(nick: String, name:String, email: String, uId: String) {
-        mDbRef.child("user").child(uId).setValue(User(nick, name, email, uId))
+        mDbRef.child(uId).setValue(User(nick, name, email, uId))
     }
 
     // 로그인 함수
@@ -80,7 +80,7 @@ class UserRepository {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // 사용자 정보 삭제 성공
-                        mDbRef.child("user").child(currentUser.uid).removeValue()
+                        mDbRef.child(currentUser.uid).removeValue()
                         callback.invoke(true, null)
                     } else {
                         // 사용자 정보 삭제 실패
