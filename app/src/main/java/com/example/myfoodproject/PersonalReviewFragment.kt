@@ -36,8 +36,3 @@ class PersonalReviewFragment : Fragment() {
         binding = null
     }
 }
-
-
-
-
-

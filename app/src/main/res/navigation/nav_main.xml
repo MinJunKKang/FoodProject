@@ -3,40 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/entryFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/entryFragment"
         android:name="com.example.myfoodproject.EntryFragment"
-        android:label="메인 화면">
+        android:label="fragment_entry"
+        tools:layout="@layout/fragment_entry" >
         <action
-            android:id="@+id/action_entryFragment_to_ramenFragment"
-            app:destination="@id/ramenFragment" />
+            android:id="@+id/action_entryFragment_to_writeFragment"
+            app:destination="@id/writeFragment" />
         <action
-            android:id="@+id/action_entryFragment_to_sushiFragment"
-            app:destination="@id/sushiFragment" />
-        <action
-            android:id="@+id/action_entryFragment_to_tonkatsuFragement"
-            app:destination="@id/tonkatsuFragement" />
+            android:id="@+id/action_entryFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ramenFragment"
-        android:name="com.example.myfoodproject.RamenFragment"
-        android:label="라멘"
-        tools:layout="@layout/fragment_ramen" />
+        android:id="@+id/writeFragment"
+        android:name="com.example.myfoodproject.WriteFragment"
+        android:label="글 쓰기"
+        tools:layout="@layout/fragment_write" />
     <fragment
-        android:id="@+id/sushiFragment"
-        android:name="com.example.myfoodproject.SushiFragment"
-        android:label="스시 "
-        tools:layout="@layout/fragment_sushi" />
+        android:id="@+id/infoFragment"
+        android:name="com.example.myfoodproject.InfoFragment"
+        android:label="내 정보"
+        tools:layout="@layout/fragment_info">
+        <action
+            android:id="@+id/action_infoFragment_to_newpasswordFragment2"
+            app:destination="@id/newpwFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_newnickFragment"
+            app:destination="@id/newnickFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/tonkatsuFragement"
-        android:name="com.example.myfoodproject.TonkatsuFragement"
-        android:label="돈카츠"
-        tools:layout="@layout/fragment_tonkatsu" />
+        android:id="@+id/newpwFragment"
+        android:name="com.example.myfoodproject.NewpasswordFragment"
+        android:label="비밀번호 변경"
+        tools:layout="@layout/fragment_newpassword" />
     <fragment
-        android:id="@+id/personalReviewFragment"
-        android:name="com.example.myfoodproject.PersonalReviewFragment"
-        android:label="개인리뷰"
-        tools:layout="@layout/fragment_personalreview"/>
+        android:id="@+id/newnickFragment"
+        android:name="com.example.myfoodproject.NewnickFragment"
+        android:label="닉네임 변경"
+        tools:layout="@layout/fragment_newnick" >
+        <action
+            android:id="@+id/action_newnickFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myfoodproject.LoginFragment"
+        android:label="로그인"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.myfoodproject.RegisterFragment"
+        android:label="회원가입"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
