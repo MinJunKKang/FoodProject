@@ -2,6 +2,7 @@ package com.example.myfoodproject.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -134,5 +135,31 @@ class UserRepository {
         }
     }
 
+    // User의 비밀번호 변경하는 함수
+    fun updatePassword(currentPassword: String, newPassword: String, callback: (Boolean, String?) -> Unit) {
+        val currentUser = mAuth.currentUser
 
+        if (currentUser != null) {
+            // 현재 비밀번호 확인
+            val credential = EmailAuthProvider.getCredential(currentUser.email!!, currentPassword)
+            currentUser.reauthenticate(credential)
+                .addOnCompleteListener { reauthTask ->
+                    if (reauthTask.isSuccessful) {
+                        // 현재 비밀번호 확인 성공하면 비밀번호 변경 진행
+                        currentUser.updatePassword(newPassword)
+                            .addOnCompleteListener { updateTask ->
+                                if (updateTask.isSuccessful) {
+                                    callback.invoke(true, "비밀번호가 변경되었습니다.")
+                                } else {
+                                    callback.invoke(false, "비밀번호 변경에 실패했습니다. 다시 시도해주세요.")
+                                }
+                            }
+                    } else {
+                        callback.invoke(false, "현재 비밀번호를 확인할 수 없습니다. 다시 시도해주세요.")
+                    }
+                }
+        } else {
+            callback.invoke(false, "사용자 정보를 가져올 수 없습니다.")
+        }
+    }
 }
