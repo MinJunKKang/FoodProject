@@ -41,7 +41,11 @@
         android:id="@+id/newpwFragment"
         android:name="com.example.myfoodproject.NewpasswordFragment"
         android:label="비밀번호 변경"
-        tools:layout="@layout/fragment_newpassword" />
+        tools:layout="@layout/fragment_newpassword" >
+        <action
+            android:id="@+id/action_newpwFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newnickFragment"
         android:name="com.example.myfoodproject.NewnickFragment"
