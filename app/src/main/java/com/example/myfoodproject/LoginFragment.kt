@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myfoodproject.databinding.FragmentLoginBinding
 import com.example.myfoodproject.viewmodel.UserViewModel
@@ -35,7 +36,7 @@ class LoginFragment : Fragment() {
 
             viewModel.login(email, password) { success, message->
                 if (success) {
-                    findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
+                    findNavController().navigate(R.id.entryFragment, null, NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build())
                 } else {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
