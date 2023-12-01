@@ -23,9 +23,10 @@ class NewnickFragment : Fragment() {
 
         binding?.btnNewnickname?.setOnClickListener {
             val newNickname = binding?.etRenick?.text?.toString()
-            if (!newNickname.isNullOrBlank()) {
+            if ( !newNickname.isNullOrBlank()) {
+                // 새 닉네임이 비어있지 않은 경우에만 업데이트 시도
                 viewModel.updateNickname(newNickname) { success, message ->
-                    if (success) {
+                    if ( success ) {
                         findNavController().navigate(R.id.action_newnickFragment_to_infoFragment)
                     } else {
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

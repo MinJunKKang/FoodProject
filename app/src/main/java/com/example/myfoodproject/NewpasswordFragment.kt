@@ -5,50 +5,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.example.myfoodproject.databinding.FragmentNewpasswordBinding
-import com.example.myfoodproject.viewmodel.UserViewModel
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [NewpasswordFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class NewpasswordFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
-    private var binding: FragmentNewpasswordBinding? = null
-    private val viewModel: UserViewModel by activityViewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = FragmentNewpasswordBinding.inflate(inflater)
-        return binding?.root
+        return inflater.inflate(R.layout.fragment_newpassword, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.btnRepassword2?.setOnClickListener {
-            val currentPassword = binding?.curPassword?.text.toString()
-            val newPassword = binding?.etNewPassword?.text.toString()
-            val confirmPassword = binding?.etChkPassword?.text.toString()
-
-            if (currentPassword.isNotBlank() && newPassword.isNotBlank() && confirmPassword.isNotBlank() && newPassword == confirmPassword) {
-                viewModel.updatePassword(currentPassword, newPassword) { success, message ->
-                    if (success) {
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_newpwFragment_to_infoFragment)
-                    } else {
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment NewpasswordFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic fun newInstance(param1: String, param2: String) =
+                NewpasswordFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
                     }
                 }
-            } else {
-                Toast.makeText(requireContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 }

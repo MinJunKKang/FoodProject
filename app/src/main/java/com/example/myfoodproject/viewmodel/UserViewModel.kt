@@ -48,13 +48,6 @@ class UserViewModel: ViewModel() {
         }
     }
 
-    // 비밀번호 바꾸는 함수
-    fun updatePassword(currentPassword: String, newPassword: String, callback: (Boolean, String?) -> Unit) {
-        userRepository.updatePassword(currentPassword, newPassword) { success, message ->
-            callback.invoke(success, message)
-        }
-    }
-
     // 로그아웃 함수
     fun logout() {
         userRepository.logout()
