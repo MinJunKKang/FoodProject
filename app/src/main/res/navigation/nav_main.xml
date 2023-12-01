@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/entryFragment">
 
     <fragment
         android:id="@+id/entryFragment"
@@ -56,10 +56,24 @@
             app:destination="@id/infoFragment" />
     </fragment>
     <fragment
+        android:id="@+id/reviewHomeFragment"
+        android:name="com.example.myfoodproject.ReviewHomeFragment"
+        android:label="fragment_review_home"
+        tools:layout="@layout/fragment_review_home" >
+        <action
+            android:id="@+id/action_reviewHomeFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewDetailFragment"
+        android:name="com.example.myfoodproject.ReviewDetailFragment"
+        android:label="fragment_review_detail"
+        tools:layout="@layout/fragment_review_detail" />
+    <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.myfoodproject.LoginFragment"
-        android:label="로그인"
-        tools:layout="@layout/fragment_login">
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -70,10 +84,6 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.myfoodproject.RegisterFragment"
-        android:label="회원가입"
-        tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

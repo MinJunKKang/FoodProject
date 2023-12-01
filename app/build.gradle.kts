@@ -1,3 +1,5 @@
+import org.bouncycastle.asn1.iana.IANAObjectIdentifiers.experimental
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -37,6 +39,7 @@ android {
     viewBinding{
         enable = true
     }
+
 }
 
 dependencies {
@@ -49,6 +52,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")
