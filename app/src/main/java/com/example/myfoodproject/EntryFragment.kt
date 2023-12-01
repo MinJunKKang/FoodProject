@@ -21,9 +21,6 @@ class EntryFragment : Fragment() {
         binding?.btnWrite?.setOnClickListener {
             findNavController().navigate(R.id.action_entryFragment_to_writeFragment)
         }
-        binding?.button?.setOnClickListener {
-            findNavController().navigate(R.id.action_entryFragment_to_reviewHomeFragment)
-        }
         return binding?.root
     }
 
