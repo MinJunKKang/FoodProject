@@ -31,7 +31,7 @@ class UserViewModel: ViewModel() {
     // FirebaseUser 가져오는 함수
     fun getCurrentUser(): LiveData<FirebaseUser?> {
         return userRepository.getCurrentUserLiveData()
-    }
+    } // 너 바꿔
 
 
     // 사용자 정보 가져오는 함수
