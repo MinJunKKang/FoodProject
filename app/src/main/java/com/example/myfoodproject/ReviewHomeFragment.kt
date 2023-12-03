@@ -1,27 +1,28 @@
 package com.example.myfoodproject
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.example.myfoodproject.databinding.FragmentReviewHomeBinding
 import com.example.myfoodproject.repository.PostRepository
+import com.example.myfoodproject.repository.UserRepository
 import com.example.myfoodproject.viewmodel.PostViewModel
+import com.example.myfoodproject.viewmodel.UserViewModel
 
 class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
     lateinit var binding: FragmentReviewHomeBinding
     private val postViewModel: PostViewModel by activityViewModels()
+    private val userViewModel: UserViewModel by activityViewModels()
+    private val userRepository: UserRepository by lazy { UserRepository() }
+    private val adapter: ReviewlistAdapter by lazy { ReviewlistAdapter(this, userRepository) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +36,6 @@ class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 리사이클러뷰 초기화
-        val adapter = ReviewlistAdapter(this)
         binding.rcReviewlist.layoutManager = LinearLayoutManager(context)
         binding.rcReviewlist.adapter = adapter
 

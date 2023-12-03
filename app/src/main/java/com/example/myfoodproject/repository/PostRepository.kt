@@ -15,7 +15,7 @@ import java.util.Date
 import java.util.Locale
 
 class PostRepository {
-    data class Post (
+    data class Post ( // 기본값을 주기 위해 공백 또는 0 넣음
         // 고유한 게시글 식별자
         val postId: String = "",
         // 게시글을 작성한 사용자의 ID
@@ -29,7 +29,10 @@ class PostRepository {
         // 이미지 URL 저장할 필드
         val imageUrl: String? = null,
         // 게시 시간 등의 타임스탬프
-        val timestamp: String = ""
+        val timestamp: Long = 0L, //최신순 정렬을 위해 long으로 형 변환함
+        //작성자의 UID
+        var userUid: String = ""
+
     )
 
     private val mDbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("posts")
@@ -47,7 +50,7 @@ class PostRepository {
                 content = content,
                 rating = rating,
                 imageUrl = null,
-                timestamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()) // 타임스탬프 형식 변경
+                timestamp = System.currentTimeMillis() // 현재 시간을 millisecond로 저장
             )
 
             mDbRef.child(postId).setValue(post)
@@ -127,13 +130,18 @@ class PostRepository {
         })
     }
 
+
+    //게시물 관찰하여 rcyclerview에 가져오기
     fun observePosts(callback: (List<Post>) -> Unit) {
-        mDbRef.addValueEventListener(object : ValueEventListener {
+        mDbRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val posts = mutableListOf<Post>()
-                for (postSnapshot in snapshot.children) {
+                for (postSnapshot in snapshot.children.reversed()) {
                     val post = postSnapshot.getValue(Post::class.java)
-                    post?.let { posts.add(it) }
+                    post?.let {
+                        // 작성자의 UID를 저장
+                        it.userUid = postSnapshot.child("userId").getValue(String::class.java) ?: ""
+                        posts.add(it) }
                 }
                 callback.invoke(posts)
             }
