@@ -167,8 +167,15 @@
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
                     android:text="TextView" />
+
+                <ImageView
+                    android:id="@+id/review_pic"
+                    android:layout_width="187dp"
+                    android:layout_height="172dp"
+                    android:src="@drawable/hackbab" />
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

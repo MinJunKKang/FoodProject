@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.example.myfoodproject.databinding.FragmentReviewDetailBinding
 import com.example.myfoodproject.repository.PostRepository
 import com.example.myfoodproject.viewmodel.CommentViewModel
@@ -42,6 +44,20 @@ class ReviewDetailFragment : Fragment() {
             val selectedPost = posts.find { it.postId == postId }
             // UI에 선택된 게시물 내용을 표시합니다.
             binding?.postLayout?.findViewById<TextView>(R.id.textView14)?.text = selectedPost?.content ?: ""
+            val imageView = binding?.postLayout?.findViewById<ImageView>(R.id.review_pic)
+            val imageUrl = selectedPost?.imageUrl
+
+            if (imageUrl != null) {
+                // imageUrl이 null이 아닌 경우 Glide를 사용하여 이미지를 표시
+                Glide.with(requireContext())
+                    .load(imageUrl)
+                    .into(imageView!!)
+            } else {
+                // imageUrl이 null인 경우, 이미지 미표시
+                imageView?.setImageResource(0)
+            }
+
+
         }
         // 댓글 목록 어댑터 초기화 (예시, 나중에 DB연동)
         val commentAdapter = CommentAdapter()
