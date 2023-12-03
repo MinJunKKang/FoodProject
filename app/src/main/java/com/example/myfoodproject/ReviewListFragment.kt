@@ -34,7 +34,7 @@ class ReviewListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_review_list, container, false)
+        return inflater.inflate(R.layout.item_review, container, false)
     }
 
     companion object {

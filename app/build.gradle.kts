@@ -37,6 +37,7 @@ android {
     viewBinding{
         enable = true
     }
+
 }
 
 dependencies {
@@ -53,10 +54,15 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //이미지 링크를 로드하기 위함
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
 }

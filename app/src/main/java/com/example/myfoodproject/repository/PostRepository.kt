@@ -1,6 +1,7 @@
 package com.example.myfoodproject.repository
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -14,21 +15,21 @@ import java.util.Date
 import java.util.Locale
 
 class PostRepository {
-    data class Post(
+    data class Post (
         // 고유한 게시글 식별자
-        val postId: String,
+        val postId: String = "",
         // 게시글을 작성한 사용자의 ID
-        val userId: String,
+        val userId: String = "",
         // 게시글 제목
-        val title: String,
+        val title: String = "",
         // 게시글 내용
-        val content: String,
+        val content: String = "",
         // 가게에 대한 평점
-        val rating: Float,
+        val rating: Float = 0.0f,
         // 이미지 URL 저장할 필드
-        val imageUrl: String?,
+        val imageUrl: String? = null,
         // 게시 시간 등의 타임스탬프
-        val timestamp: String
+        val timestamp: String = ""
     )
 
     private val mDbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("posts")
@@ -125,5 +126,23 @@ class PostRepository {
             }
         })
     }
+
+    fun observePosts(callback: (List<Post>) -> Unit) {
+        mDbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val posts = mutableListOf<Post>()
+                for (postSnapshot in snapshot.children) {
+                    val post = postSnapshot.getValue(Post::class.java)
+                    post?.let { posts.add(it) }
+                }
+                callback.invoke(posts)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback.invoke(emptyList())
+            }
+        })
+    }
+
 
 }

@@ -27,4 +27,12 @@ class PostViewModel : ViewModel() {
             callback.invoke(success, message)
         }
     }
+
+
+    // 게시물 가져오는 함수 추가
+    fun observePosts() {
+        postRepository.observePosts { posts ->
+            _posts.value = posts
+        }
+    }
 }

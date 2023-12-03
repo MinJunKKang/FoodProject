@@ -6,26 +6,22 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
+import android.widget.AdapterView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.example.myfoodproject.databinding.FragmentReviewHomeBinding
+import com.example.myfoodproject.repository.PostRepository
+import com.example.myfoodproject.viewmodel.PostViewModel
 
-class ReviewHomeFragment : Fragment(), OnItemClickListener {
+class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
     lateinit var binding: FragmentReviewHomeBinding
-
-    val reviewListss = arrayListOf( //DB로 연동받을 부분
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-        Reviewlist(R.drawable.hackbab, R.drawable.male, "일식 매니아", 4.9, "23.11.20"),
-    )
+    private val postViewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +36,8 @@ class ReviewHomeFragment : Fragment(), OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // 리사이클러뷰 초기화
-        val adapter = ReviewlistAdapter(reviewListss, this)
-        binding.rcReviewlist.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = ReviewlistAdapter(this)
+        binding.rcReviewlist.layoutManager = LinearLayoutManager(context)
         binding.rcReviewlist.adapter = adapter
 
         // 구분선 만들기
@@ -56,12 +52,24 @@ class ReviewHomeFragment : Fragment(), OnItemClickListener {
         binding?.btnWrite2?.setOnClickListener {
             findNavController().navigate(R.id.action_reviewHomeFragment_to_writeFragment)
         }
+
+        // 게시물 관찰을 위한 Observer 추가
+        postViewModel.observePosts()
+        // Firebasepost를 가져와서 게시물을 UI에 표시하는 Observer
+        postViewModel.posts.observe(viewLifecycleOwner) { posts ->
+            // 게시물 목록이 변경될 때마다 어댑터에 새로운 데이터 설정
+            adapter.submitList(posts)
+        }
     }
 
-    override fun onItemClick(reviewlist: Reviewlist) {
+    override fun onItemClick(post: PostRepository.Post) {
         // 클릭된 아이템에 대한 동작 수행
         // 다른 Fragment로 이동하는 코드를 여기에 추가
-        findNavController().navigate(R.id.action_reviewHomeFragment_to_reviewDetailFragment)
+        val postId = post.postId
+        val bundle = Bundle().apply {
+            putString("postId", postId) // 클릭된 아이템의 postId를 전달
+        }
+        findNavController().navigate(R.id.action_reviewHomeFragment_to_reviewDetailFragment, bundle)
     }
 
 }

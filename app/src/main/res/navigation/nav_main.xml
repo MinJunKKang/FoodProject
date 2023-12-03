@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_entryFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/writeFragment"
@@ -75,5 +78,22 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewDetailFragment"
+        android:name="com.example.myfoodproject.ReviewDetailFragment"
+        android:label="리뷰 상세"
+        tools:layout="@layout/fragment_review_detail" />
+    <fragment
+        android:id="@+id/reviewHomeFragment"
+        android:name="com.example.myfoodproject.ReviewHomeFragment"
+        android:label="리뷰 목록"
+        tools:layout="@layout/fragment_review_home">
+        <action
+            android:id="@+id/action_reviewHomeFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment" />
+        <action
+            android:id="@+id/action_reviewHomeFragment_to_writeFragment"
+            app:destination="@id/writeFragment" />
     </fragment>
 </navigation>
