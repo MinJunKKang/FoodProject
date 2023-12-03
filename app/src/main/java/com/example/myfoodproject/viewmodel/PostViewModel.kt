@@ -11,6 +11,9 @@ class PostViewModel : ViewModel() {
     private val _posts = MutableLiveData<List<PostRepository.Post>>()
     val posts: LiveData<List<PostRepository.Post>> get() = _posts
 
+    private val _postCount = MutableLiveData<Int>()
+    val postCount: LiveData<Int> get() = _postCount
+
     private val postRepository = PostRepository()
 
 
@@ -35,6 +38,13 @@ class PostViewModel : ViewModel() {
     fun observePosts() {
         postRepository.observePosts { posts ->
             _posts.value = posts
+        }
+    }
+
+    // 게시물 목록 로드 함수
+    fun loadPostsCount() {
+        postRepository.observePosts { posts ->
+            _postCount.value = posts.size // 게시물 개수 설정
         }
     }
 }

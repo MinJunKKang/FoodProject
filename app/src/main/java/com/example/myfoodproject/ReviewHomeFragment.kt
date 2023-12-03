@@ -71,12 +71,22 @@ class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
 
                     // 평균 평점을 textView6에 설정
                     binding.textView6.text = formattedRating
+
+                    // 게시물 개수를 업데이트
+                    postViewModel.loadPostsCount()
                 }
                 // 수정 종료
             } else {
                 // 게시물이 없는 경우 평균 평점을 0.0으로 설정
                 binding.textView6.text = "0.00"
+                // 게시물 개수를 업데이트
+                postViewModel.loadPostsCount()
             }
+        }
+        // 게시물 개수를 UI에 표시하는 Observer
+        postViewModel.postCount.observe(viewLifecycleOwner) { postCount ->
+            // 게시물 총 개수를 UI에 표시
+            binding.textView9.text = postCount.toString()
         }
 
     }
