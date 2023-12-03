@@ -36,6 +36,8 @@ class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val postRepository = PostRepository()
+
         binding.rcReviewlist.layoutManager = LinearLayoutManager(context)
         binding.rcReviewlist.adapter = adapter
 
@@ -54,11 +56,29 @@ class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
 
         // 게시물 관찰을 위한 Observer 추가
         postViewModel.observePosts()
+
         // Firebasepost를 가져와서 게시물을 UI에 표시하는 Observer
         postViewModel.posts.observe(viewLifecycleOwner) { posts ->
             // 게시물 목록이 변경될 때마다 어댑터에 새로운 데이터 설정
             adapter.submitList(posts)
+
+            // 평균 평점 계산 및 표시
+            if (posts.isNotEmpty()) {
+                // 수정 시작: PostRepository의 calculateAverageRating 함수에서는 Double을 반환하므로
+                // TextView에 설정하기 전에 String으로 변환 필요
+                postRepository.calculateAverageRating(posts) { averageRating ->
+                    val formattedRating = String.format("%.2f", averageRating)
+
+                    // 평균 평점을 textView6에 설정
+                    binding.textView6.text = formattedRating
+                }
+                // 수정 종료
+            } else {
+                // 게시물이 없는 경우 평균 평점을 0.0으로 설정
+                binding.textView6.text = "0.00"
+            }
         }
+
     }
 
     override fun onItemClick(post: PostRepository.Post) {

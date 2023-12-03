@@ -1,7 +1,6 @@
 package com.example.myfoodproject.repository
 
 import android.net.Uri
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -10,9 +9,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class PostRepository {
     data class Post ( // 기본값을 주기 위해 공백 또는 0 넣음
@@ -150,6 +146,24 @@ class PostRepository {
                 callback.invoke(emptyList())
             }
         })
+    }
+
+    // 별점 평균 계산
+
+    fun calculateAverageRating(posts: List<Post>, callback: (Double) -> Unit) {
+        var totalRating = 0.0
+        var numberOfRatings = 0
+
+        for (post in posts) {
+            // 주의: 이미 rating이 Float 타입으로 선언되어 있으므로 타입 변환이 필요하지 않음
+            val rating = post.rating
+            totalRating += rating
+            numberOfRatings++
+        }
+
+        // 최종적으로 평균 평점을 계산하고 콜백으로 전달
+        val averageRating = if (numberOfRatings > 0) totalRating / numberOfRatings else 0.0
+        callback.invoke(averageRating)
     }
 
 

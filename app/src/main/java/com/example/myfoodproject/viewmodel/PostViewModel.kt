@@ -13,6 +13,8 @@ class PostViewModel : ViewModel() {
 
     private val postRepository = PostRepository()
 
+
+
     // 글 작성 함수
     fun addPost(title: String, content: String, rating: Float, imageUri: Uri?, callback: (Boolean, String?) -> Unit) {
         postRepository.addPost(title, content, rating, imageUri) { success, message ->
