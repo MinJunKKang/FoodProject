@@ -127,7 +127,7 @@ class PostRepository {
     }
 
 
-    //게시물 관찰하여 rcyclerview에 가져오기
+    //게시물 관찰하여 rcyclerview에 가져오기, 최신순으로 정렬
     fun observePosts(callback: (List<Post>) -> Unit) {
         mDbRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

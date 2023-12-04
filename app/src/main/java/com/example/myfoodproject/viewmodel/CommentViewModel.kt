@@ -4,12 +4,14 @@ import CommentRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myfoodproject.repository.UserRepository
 
 class CommentViewModel: ViewModel() {
     private val _comments = MutableLiveData<List<CommentRepository.Comment>>()
     val comments: LiveData<List<CommentRepository.Comment>> get() = _comments //함부로 바꿀 수 없는 데이터를 밖에서 공개
 
-    private val commentRepository = CommentRepository()
+    val commentRepository = CommentRepository()
+
 
     // 댓글 작성 함수
     fun addComment(commentcontent: String, callback: (Boolean, String?) -> Unit) {

@@ -11,10 +11,10 @@ import java.util.Locale
 class CommentRepository {
 
     data class Comment(
-        val commentId: String,
-        val userId: String,
-        val commentcontent: String,
-        val commenttimestamp: String
+        val commentId: String = "",
+        val userId: String = "",
+        val commentcontent: String = "",
+        val commenttimestamp: String = ""
     )
 
     private val mDbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("comments")
