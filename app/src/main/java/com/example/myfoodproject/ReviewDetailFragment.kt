@@ -71,7 +71,7 @@ class ReviewDetailFragment : Fragment() {
         binding?.rcComment?.adapter = commentAdapter
 
         // 댓글 목록 설정
-        commentViewModel.getComments()
+        commentViewModel.getComments(postId)
 
         // 댓글 목록 관찰
         commentViewModel.comments.observe(viewLifecycleOwner) { comments ->
@@ -84,8 +84,9 @@ class ReviewDetailFragment : Fragment() {
             // 댓글 작성 버튼 클릭 시 처리
             val commentText = binding?.commentEditText?.text.toString()
             if (commentText.isNotEmpty()) {
+
                 // 댓글이 비어 있지 않은 경우에만 추가
-                commentViewModel.addComment(commentText){ success, message ->
+                commentViewModel.addComment(postId, commentText){ success, message ->
                     if (success){
                         Toast.makeText(requireContext(), "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show()
                     }

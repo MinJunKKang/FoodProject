@@ -14,8 +14,8 @@ class CommentViewModel: ViewModel() {
 
 
     // 댓글 작성 함수
-    fun addComment(commentcontent: String, callback: (Boolean, String?) -> Unit) {
-        commentRepository.addComment(commentcontent) { success, message ->
+    fun addComment(postId: String, commentcontent: String, callback: (Boolean, String?) -> Unit) {
+        commentRepository.addComment(postId, commentcontent) { success, message ->
             callback.invoke(success, message)
         }
     }
@@ -29,8 +29,8 @@ class CommentViewModel: ViewModel() {
     }
 
     // 댓글 읽기 함수
-    fun getComments() {
-        commentRepository.getComments { comments ->
+    fun getComments(postId: String) {
+        commentRepository.getComments(postId) { comments ->
             _comments.postValue(comments)
         }
     }

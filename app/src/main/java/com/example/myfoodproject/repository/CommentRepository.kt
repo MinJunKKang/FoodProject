@@ -14,13 +14,14 @@ class CommentRepository {
         val commentId: String = "",
         val userId: String = "",
         val commentcontent: String = "",
-        val commenttimestamp: String = ""
+        val commenttimestamp: String = "",
+        val postId: String = ""
     )
 
     private val mDbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("comments")
 
     // 댓글 작성 함수
-    fun addComment(commentcontent: String, callback: (Boolean, String?) -> Unit) {
+    fun addComment(postId: String, commentcontent: String, callback: (Boolean, String?) -> Unit) {
         val commentId = mDbRef.push().key
         val userId = FirebaseAuth.getInstance().currentUser?.uid!!
 
@@ -29,7 +30,8 @@ class CommentRepository {
                 commentId = commentId,
                 userId = userId,
                 commentcontent = commentcontent,
-                commenttimestamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                commenttimestamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()),
+                postId = postId
             )
 
             mDbRef.child(commentId).setValue(comment)
@@ -58,8 +60,8 @@ class CommentRepository {
     }
 
     // 댓글 읽기 함수
-    fun getComments(callback: (List<Comment>) -> Unit) {
-        mDbRef.addValueEventListener(object : ValueEventListener {
+    fun getComments(postId: String, callback: (List<Comment>) -> Unit) {
+        mDbRef.orderByChild("postId").equalTo(postId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val comments = mutableListOf<Comment>()
                 for (dataSnapshot in snapshot.children) {
