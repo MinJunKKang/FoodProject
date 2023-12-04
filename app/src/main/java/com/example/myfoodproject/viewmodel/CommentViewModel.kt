@@ -4,7 +4,6 @@ import CommentRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfoodproject.repository.UserRepository
 
 class CommentViewModel: ViewModel() {
     private val _comments = MutableLiveData<List<CommentRepository.Comment>>()

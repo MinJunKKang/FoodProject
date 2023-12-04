@@ -9,8 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -156,7 +154,7 @@ class ReviewDetailFragment : Fragment() {
             Toast.makeText(binding?.btnLike?.context,"좋아요 누른 가게에 추가되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        // 구분선 만들기
+        // 댓글 구분선 만들기
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding?.rcComment?.addItemDecoration(decoration)
 
