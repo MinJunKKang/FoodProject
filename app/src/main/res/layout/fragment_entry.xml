@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="행복해"
+        android:text="일식맛집에 오신 것을 환영합니다."
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -31,6 +31,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <Button
+            android:id="@+id/btn_ramen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="라멘" />
+
+        <Button
+            android:id="@+id/btn_sushi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="스시" />
+
+        <Button
+            android:id="@+id/btn_tonkatsu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="돈카츠" />
 
         <Button
             android:id="@+id/btn_info"
