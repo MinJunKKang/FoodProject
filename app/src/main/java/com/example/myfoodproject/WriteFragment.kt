@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myfoodproject.databinding.FragmentWriteBinding
 import com.example.myfoodproject.viewmodel.PostViewModel
 
@@ -58,6 +59,7 @@ class WriteFragment : Fragment() {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
+            findNavController().navigate(R.id.action_writeFragment_to_reviewHomeFragment)
         }
     }
 

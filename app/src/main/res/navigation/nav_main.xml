@@ -24,7 +24,11 @@
         android:id="@+id/writeFragment"
         android:name="com.example.myfoodproject.WriteFragment"
         android:label="글 쓰기"
-        tools:layout="@layout/fragment_write" />
+        tools:layout="@layout/fragment_write" >
+        <action
+            android:id="@+id/action_writeFragment_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.myfoodproject.InfoFragment"
@@ -83,7 +87,11 @@
         android:id="@+id/reviewDetailFragment"
         android:name="com.example.myfoodproject.ReviewDetailFragment"
         android:label="리뷰 상세"
-        tools:layout="@layout/fragment_review_detail" />
+        tools:layout="@layout/fragment_review_detail" >
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reviewHomeFragment"
         android:name="com.example.myfoodproject.ReviewHomeFragment"

@@ -1,5 +1,6 @@
 package com.example.myfoodproject.repository
 
+import CommentRepository
 import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -31,6 +32,7 @@ class PostRepository {
 
     )
 
+    private val commentRepository = CommentRepository()
     private val mDbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("posts")
     private val mStorageRef: StorageReference = FirebaseStorage.getInstance().getReference("post_images")
     // 글 작성 함수
@@ -110,7 +112,14 @@ class PostRepository {
                     mDbRef.child(postId).removeValue()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                callback.invoke(true, "게시글이 삭제되었습니다.")
+                                // 게시물 삭제 성공 시 관련된 댓글도 삭제
+                                commentRepository.deleteCommentsForPost(postId) { success, message ->
+                                    if (success) {
+                                        callback.invoke(true, "게시글이 삭제되었습니다.")
+                                    } else {
+                                        callback.invoke(false, "게시글 삭제는 성공했지만, 댓글 삭제 중 오류가 발생했습니다.")
+                                    }
+                                }
                             } else {
                                 callback.invoke(false, "게시글을 삭제하는데 실패했습니다.")
                             }

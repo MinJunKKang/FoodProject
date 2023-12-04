@@ -4,6 +4,7 @@ import CommentRepository
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +42,20 @@ class CommentAdapter(private val commentRepository: CommentRepository, private v
                     binding.usrName.text = it.nick
                 }
             }
-
+            // 댓글 삭제 버튼 클릭 이벤트 처리
+            binding.btnCommentdelete.setOnClickListener {
+                deleteComment(comment)
+            }
+        }
+        // 댓글 삭제 함수
+        private fun deleteComment(comment: CommentRepository.Comment) {
+            commentRepository.deleteComment(comment.commentId) { success, message ->
+                if (success) {
+                    Toast.makeText(itemView.context, "댓글이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(itemView.context, "댓글 삭제에 실패했습니다. $message", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

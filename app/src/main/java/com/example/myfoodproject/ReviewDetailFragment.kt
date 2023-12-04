@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myfoodproject.databinding.FragmentReviewDetailBinding
@@ -19,6 +21,9 @@ import com.example.myfoodproject.repository.UserRepository
 import com.example.myfoodproject.viewmodel.CommentViewModel
 import com.example.myfoodproject.viewmodel.PostViewModel
 import com.example.myfoodproject.viewmodel.UserViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ReviewDetailFragment : Fragment() {
 
@@ -29,6 +34,7 @@ class ReviewDetailFragment : Fragment() {
     private var binding: FragmentReviewDetailBinding? = null
 
     private val postRepository: PostRepository by lazy { PostRepository() }
+    private val userRepository: UserRepository by lazy { UserRepository() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +54,18 @@ class ReviewDetailFragment : Fragment() {
         // 선택된 게시물을 가져와서 관찰
         postViewModel.posts.observe(viewLifecycleOwner) { posts ->
             val selectedPost = posts.find { it.postId == postId }
+            val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(selectedPost!!.timestamp))
             // UI에 선택된 게시물 내용을 표시
             binding?.postLayout?.findViewById<TextView>(R.id.textView14)?.text = selectedPost?.content ?: ""
+            binding?.postLayout?.findViewById<TextView>(R.id.rv_detalitile)?.text = selectedPost?.title?: ""
+            binding?.postLayout?.findViewById<TextView>(R.id.textView23)?.text = formattedDate
+            // 작성자의 UID를 사용하여 UserRepository에서 닉네임 가져오기
+            userRepository.observeUser(selectedPost!!.userUid) { user ->
+                // user가 null이 아닌 경우에만 닉네임을 설정
+                user?.let {
+                    binding?.postLayout?.findViewById<TextView>(R.id.textView22)?.text = it.nick
+                }
+            }
             val imageView = binding?.postLayout?.findViewById<ImageView>(R.id.review_pic)
             val imageUrl = selectedPost?.imageUrl
 
@@ -63,8 +79,46 @@ class ReviewDetailFragment : Fragment() {
                 imageView?.setImageResource(0)
             }
 
+            // 평균 평점 계산 및 표시
+            if (posts.isNotEmpty()) {
+                // TextView에 설정하기 전에 String으로 변환 필요
+                postRepository.calculateAverageRating(posts) { averageRating ->
+                    val formattedRating = String.format("%.2f", averageRating)
 
+                    // 평균 평점을 textView6에 설정
+                    binding?.textView6?.text = formattedRating
+
+                    // 게시물 개수를 업데이트
+                    postViewModel.loadPostsCount()
+                }
+                // 수정 종료
+            } else {
+                // 게시물이 없는 경우 평균 평점을 0.0으로 설정
+                binding?.textView6?.text = "0.00"
+                // 게시물 개수를 업데이트
+                postViewModel.loadPostsCount()
+            }
         }
+
+        // 게시물 개수를 UI에 표시하는 Observer
+        postViewModel.postCount.observe(viewLifecycleOwner) { postCount ->
+            // 게시물 총 개수를 UI에 표시
+            binding?.textView9?.text = postCount.toString()
+        }
+
+        //게시물 삭제
+        binding?.btnDelete?.setOnClickListener {
+            postViewModel.deletePost(postId) { success, message ->
+                if( success ) {
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
+            }
+            findNavController().navigate(R.id.action_reviewDetailFragment_to_reviewHomeFragment)
+        }
+
+
         // 댓글 목록 어댑터 초기화
         val commentAdapter = CommentAdapter(commentViewModel.commentRepository, userViewModel.userRepository)
         binding?.rcComment?.layoutManager = LinearLayoutManager(requireContext())
@@ -76,6 +130,7 @@ class ReviewDetailFragment : Fragment() {
         // 댓글 목록 관찰
         commentViewModel.comments.observe(viewLifecycleOwner) { comments ->
             commentAdapter.submitList(comments)
+
         }
 
 
@@ -101,38 +156,10 @@ class ReviewDetailFragment : Fragment() {
             Toast.makeText(binding?.btnLike?.context,"좋아요 누른 가게에 추가되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        // 게시물 관찰을 위한 Observer 추가
-        postViewModel.observePosts()
+        // 구분선 만들기
+        val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        binding?.rcComment?.addItemDecoration(decoration)
 
-        // Firebasepost를 가져와서 게시물을 UI에 표시하는 Observer
-        postViewModel.posts.observe(viewLifecycleOwner) { posts ->
-            // 게시물 목록이 변경될 때마다 어댑터에 새로운 데이터 설정
-
-            // 평균 평점 계산 및 표시
-            if (posts.isNotEmpty()) {
-                // TextView에 설정하기 전에 String으로 변환 필요
-                postRepository.calculateAverageRating(posts) { averageRating ->
-                    val formattedRating = String.format("%.2f", averageRating)
-
-                    // 평균 평점을 textView6에 설정
-                    binding?.textView6?.text = formattedRating
-
-                    // 게시물 개수를 업데이트
-                    postViewModel.loadPostsCount()
-                }
-                // 수정 종료
-            } else {
-                // 게시물이 없는 경우 평균 평점을 0.0으로 설정
-                binding?.textView6?.text = "0.00"
-                // 게시물 개수를 업데이트
-                postViewModel.loadPostsCount()
-            }
-        }
-        // 게시물 개수를 UI에 표시하는 Observer
-        postViewModel.postCount.observe(viewLifecycleOwner) { postCount ->
-            // 게시물 총 개수를 UI에 표시
-            binding?.textView9?.text = postCount.toString()
-        }
     }
 
     override fun onDestroyView() {
