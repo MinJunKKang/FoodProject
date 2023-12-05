@@ -21,15 +21,25 @@ class EntryFragment : Fragment() {
         binding?.btnWrite?.setOnClickListener {
             findNavController().navigate(R.id.action_entryFragment_to_writeFragment)
         }
-        binding?.btnTest?.setOnClickListener {
-            findNavController().navigate(R.id.action_entryFragment_to_reviewHomeFragment)
-        }
+
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.btnRamen?.setOnClickListener{
+            findNavController().navigate(R.id.action_entryFragment_to_ramenFragment)
+        }
+        binding?.btnSushi?.setOnClickListener{
+            findNavController().navigate(R.id.action_entryFragment_to_sushiFragment)
+        }
+        binding?.btnTonkatsu?.setOnClickListener{
+            findNavController().navigate(R.id.action_entryFragment_to_tonkatsuFragement)
+        }
+
 
     }
+
+
 }

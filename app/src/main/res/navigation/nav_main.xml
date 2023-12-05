@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/entryFragment"
         android:name="com.example.myfoodproject.EntryFragment"
-        android:label="fragment_entry"
-        tools:layout="@layout/fragment_entry" >
+        android:label="메인 화면"
+        tools:layout="@layout/fragment_entry">
         <action
             android:id="@+id/action_entryFragment_to_writeFragment"
             app:destination="@id/writeFragment" />
@@ -17,8 +17,14 @@
             android:id="@+id/action_entryFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
         <action
-            android:id="@+id/action_entryFragment_to_reviewHomeFragment"
-            app:destination="@id/reviewHomeFragment" />
+            android:id="@+id/action_entryFragment_to_ramenFragment"
+            app:destination="@id/ramenFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_sushiFragment"
+            app:destination="@id/sushiFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_tonkatsuFragement"
+            app:destination="@id/tonkatsuFragement" />
     </fragment>
     <fragment
         android:id="@+id/writeFragment"
@@ -43,6 +49,9 @@
         <action
             android:id="@+id/action_infoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_personalReviewFragment"
+            app:destination="@id/personalReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/newpwFragment"
@@ -104,4 +113,36 @@
             android:id="@+id/action_reviewHomeFragment_to_writeFragment"
             app:destination="@id/writeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ramenFragment"
+        android:name="com.example.myfoodproject.RamenFragment"
+        android:label="라멘 카테고리"
+        tools:layout="@layout/fragment_ramen">
+        <action
+            android:id="@+id/action_ramenFragment_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sushiFragment"
+        android:name="com.example.myfoodproject.SushiFragment"
+        android:label="스시 카테고리"
+        tools:layout="@layout/fragment_sushi">
+        <action
+            android:id="@+id/action_sushiFragment_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tonkatsuFragement"
+        android:name="com.example.myfoodproject.TonkatsuFragement"
+        android:label="돈카츠 카테고리"
+        tools:layout="@layout/fragment_tonkatsu">
+        <action
+            android:id="@+id/action_tonkatsuFragement_to_reviewHomeFragment"
+            app:destination="@id/reviewHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalReviewFragment"
+        android:name="com.example.myfoodproject.PersonalReviewFragment"
+        android:label="개인 리뷰"
+        tools:layout="@layout/fragment_personalreview" />
 </navigation>
