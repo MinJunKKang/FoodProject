@@ -37,6 +37,9 @@ class InfoFragment : Fragment() {
         binding?.btnRenickname?.setOnClickListener {
             findNavController().navigate(R.id.action_infoFragment_to_newnickFragment)
         }
+        binding?.btnWreview?.setOnClickListener {
+            findNavController().navigate(R.id.action_infoFragment_to_personalReviewFragment)
+        }
         binding?.btnLogout?.setOnClickListener {
             viewModel.logout()
             findNavController().navigate(R.id.action_infoFragment_to_loginFragment)
