@@ -55,6 +55,7 @@ class CommentAdapter(private val commentRepository: CommentRepository, private v
         }
     }
 
+    // 리사이클러뷰에서 아이템이 업데이트되었는지 여부를 확인
     private class CommentDiffCallback : DiffUtil.ItemCallback<CommentRepository.Comment>() {
         override fun areItemsTheSame(oldItem: CommentRepository.Comment, newItem: CommentRepository.Comment): Boolean {
             return oldItem.commentId == newItem.commentId

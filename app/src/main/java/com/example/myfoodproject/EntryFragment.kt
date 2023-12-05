@@ -14,10 +14,6 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEntryBinding.inflate(inflater)
-
-        binding?.btnInfo?.setOnClickListener {
-            findNavController().navigate(R.id.action_entryFragment_to_infoFragment)
-        }
         return binding?.root
     }
 

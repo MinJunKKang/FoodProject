@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfoodproject.databinding.ListReviewsBinding
 class ReviewsAdapter(val reviews: Array<Review>): RecyclerView.Adapter<ReviewsAdapter.Holder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewsAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ListReviewsBinding.inflate(LayoutInflater.from(parent.context))
-        return ReviewsAdapter.Holder(binding)
+        return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -22,7 +22,7 @@ class ReviewsAdapter(val reviews: Array<Review>): RecyclerView.Adapter<ReviewsAd
             binding.imageView3.setImageResource(R.drawable.star)
             binding.txtComment.text = review.comment
             binding.txtGrade.text = review.grade.toString()
-            binding.txtDate.text = review.date.toString()
+            binding.txtDate.text = review.date
         }
     }
 }
