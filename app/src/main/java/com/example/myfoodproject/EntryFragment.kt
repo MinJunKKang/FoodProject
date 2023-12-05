@@ -18,10 +18,6 @@ class EntryFragment : Fragment() {
         binding?.btnInfo?.setOnClickListener {
             findNavController().navigate(R.id.action_entryFragment_to_infoFragment)
         }
-        binding?.btnWrite?.setOnClickListener {
-            findNavController().navigate(R.id.action_entryFragment_to_writeFragment)
-        }
-
         return binding?.root
     }
 
