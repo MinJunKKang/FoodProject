@@ -3,15 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/newnickFragment"
+        android:id="@+id/entryFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_home_24"
         android:title="홈 화면" />
-    <item
-        android:id="@+id/writeFragment"
-        android:icon="@drawable/baseline_mode_24"
-        android:title="글 작성" />
     <item
         android:id="@+id/infoFragment"
         android:layout_width="wrap_content"

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = binding.bottomNav
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.newnickFragment, R.id.writeFragment, R.id.infoFragment)
+            setOf(R.id.entryFragment, R.id.infoFragment)
         )
 
         setupActionBarWithNavController(navController)
