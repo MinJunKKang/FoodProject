@@ -11,9 +11,6 @@
         android:label="메인 화면"
         tools:layout="@layout/fragment_entry">
         <action
-            android:id="@+id/action_entryFragment_to_writeFragment"
-            app:destination="@id/writeFragment" />
-        <action
             android:id="@+id/action_entryFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
         <action
