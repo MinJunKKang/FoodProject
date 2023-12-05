@@ -64,8 +64,7 @@ class ReviewHomeFragment : Fragment(), ReviewlistAdapter.OnItemClickListener {
 
             // 평균 평점 계산 및 표시
             if (posts.isNotEmpty()) {
-                // 수정 시작: PostRepository의 calculateAverageRating 함수에서는 Double을 반환하므로
-                // TextView에 설정하기 전에 String으로 변환 필요
+                // PostRepository의 calculateAverageRating 함수에서는 Double을 반환하므로 TextView에 설정하기 전에 String으로 변환 필요
                 postRepository.calculateAverageRating(posts) { averageRating ->
                     val formattedRating = String.format("%.2f", averageRating)
 
