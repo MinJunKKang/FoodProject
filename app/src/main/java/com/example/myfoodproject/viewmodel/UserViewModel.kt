@@ -11,7 +11,7 @@ class UserViewModel: ViewModel() {
     private val _userInfo = MutableLiveData<UserRepository.User?>()
     val userInfo: LiveData<UserRepository.User?> get() = _userInfo
 
-    private val userRepository = UserRepository()
+    val userRepository = UserRepository()
 
 
     // 회원가입 함수
